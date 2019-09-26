@@ -18,7 +18,7 @@ __pycache__/
 *.so
 *.vs
 *.pyc
-
+.vscode
 *.so
 
 # Packages #
