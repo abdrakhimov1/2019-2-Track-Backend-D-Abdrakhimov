@@ -144,29 +144,33 @@ class game_form:
         if moving.user_type == someone_won:
 
             print("Great job, %s" %moving.name)
-            print("Try again? \n")
+            
+            print("Try again? (yes/no) \n")
 
         elif waitng.user_type == someone_won:
 
              print("Great job, %s" %waitng.name)
-             print("Try again? \n")
+             
+             print("Try again? (yes/no) \n")
 
         else:
 
             print("Friendship forever!")
             print("Try again? (yes/no) \n")
+            
 
         return 0
 
 
 
+if __name__ == '__main__':
 
-game = game_form()
+    game = game_form()
 
-game.game_play()
-
-while input() == "yes":
     game.game_play()
+
+    while input() == "yes":
+        game.game_play()
 
 
 
