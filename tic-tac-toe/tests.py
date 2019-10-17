@@ -1,16 +1,15 @@
 import unittest
-import tic_tac_toe_user
-import tic_tac_toe
 
-test_form = tic_tac_toe.game_form
+from tic_tac_toe import we_have_winner
+
+
 
 #FIXME Что тут тестить?
 
 class Test(unittest.TestCase):
     
-    # def test_sum(self):
-    #     self.assertEqual(test_form.game_play(), 0, "Should be 0")
-    pass
+    def test_winner(self):
+        self.assertEqual(we_have_winner(['X', 'X', 'O', 'O', 'O', 'X', 'X', 'X', 'O']), 'noone')
 
     
 
