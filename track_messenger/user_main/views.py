@@ -1,12 +1,32 @@
 from django.shortcuts import render
-from django.http import JsonResponse
-from django.http import HttpResponse
-from django.http import Http404
-from django.views.generic import View
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.http import HttpResponseRedirect
+from django.views.decorators.http  import require_GET, require_POST
+from django.contrib.auth.decorators import login_required
+from main.forms import LoginForm
+# Create your views here.
 
-def start_page(request):
-    return render(request, 'main_page.html')
+def login(request):
+    form = LoginForm()
+    context = {'form' : form}
+    return render(request, 'login.html', context)
 
-def profile(request):
+def legacy_login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    print(user)
+    
+    if user is not None:
+        auth_login(request, user)
+        return HttpResponseRedirect('/')
 
-    return JsonResponse({'my' : 'profile'})
+    return HttpResponseRedirect('/')
+        
+
+
+@login_required
+def homePage(request):
+    return render(request, 'homePage.html')
