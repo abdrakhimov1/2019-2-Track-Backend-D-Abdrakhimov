@@ -1,0 +1,34 @@
+{% extends  'base.html' %}
+{% load crispy_forms_tags %}
+{% load fontawesome %}
+{% block main %}
+
+<head>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+</head>
+<div class="card">
+    <div class="card-body" style="background-color:blueviolet; color: cornsilk;">
+        <h4 class="card-title">Log in to your account</h4>
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" style="margin-bottom: 20px;">
+
+            {{ form|crispy }}
+
+            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+        </form>
+
+        <div class="row">
+            <div class="col-md-8 mx-auto social-container my-2 order-md-1">
+
+                <a href="/login/vk-oauth2" class="btn btn-social-icon btn-lg btn-vk">
+                    <i class="fa fa-vk"></i>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

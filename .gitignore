@@ -154,3 +154,6 @@ dmypy.json
 
 # C extensions
 *.so
+
+**/migrations/
+**/**/migrations

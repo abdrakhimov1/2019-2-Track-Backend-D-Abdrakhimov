@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      #POSTGRES_DB: postgres_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+  manage_db:
+    build: .
+    command: python3 manage.py migrate
+    volumes:
+            - .:/tack_messenger
+    depends_on:
+            - db
+    environment:
+            POSTGRES_DB: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: 1234
+            POSTGRES_HOST: deploy_messenger_db_1
+
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+            - .:/tack_messenger
+    ports:
+            - "8000:8000"
+    depends_on:
+            - db
+    environment:
+            POSTGRES_DB: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: 1234
+            POSTGRES_HOST: deploy_messenger_db_1
